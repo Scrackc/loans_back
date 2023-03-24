@@ -17,10 +17,10 @@ export class DetailLoanController {
     return this.detailLoanService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.detailLoanService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.detailLoanService.findOne(+id);
+  // }
 
 
 

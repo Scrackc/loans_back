@@ -9,7 +9,7 @@ export class MovesController {
 
   @Post()
   create(@Body() createMoveDto: CreateMoveDto) {
-    return this.movesService.create(createMoveDto);
+    // return this.movesService.create(createMoveDto);
   }
 
   @Get()

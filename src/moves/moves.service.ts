@@ -1,11 +1,24 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateMoveDto } from './dto/create-move.dto';
 import { UpdateMoveDto } from './dto/update-move.dto';
+import { Move } from './entities/move.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class MovesService {
-  create(createMoveDto: CreateMoveDto) {
-    return 'This action adds a new move';
+
+  constructor(
+    @InjectRepository(Move)
+    private readonly moveRepository: Repository<Move>
+  ){}
+
+  create(createMoveDto: CreateMoveDto, user:User) {
+    return this.moveRepository.create({
+      ...createMoveDto,
+      user
+    })
   }
 
   findAll() {

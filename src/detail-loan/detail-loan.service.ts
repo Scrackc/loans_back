@@ -4,6 +4,7 @@ import { CreateDetailLoanDto } from './dto/create-detail-loan.dto';
 import { UpdateDetailLoanDto } from './dto/update-detail-loan.dto';
 import { DetailLoan } from './entities/detail-loan.entity';
 import { Repository } from 'typeorm';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class DetailLoanService {
@@ -15,6 +16,7 @@ export class DetailLoanService {
   create(createDetailLoanDto: CreateDetailLoanDto) {
     return this.detailRepository.create({
       ...createDetailLoanDto,
+
       remainingQuantity: createDetailLoanDto.quantity
     });
   }
@@ -23,15 +25,17 @@ export class DetailLoanService {
     return `This action returns all detailLoan`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} detailLoan`;
+  async findOne(loanId: string, productId: string) {
+    return await this.detailRepository.findOne({ where: { loanId, productId } });
   }
 
-  async update(loanId: string, productId: string, numberItems: number) {
+  async update(loanId: string, productId: string, numberItems: number, user:User) {
     const detailUpdate = await this.detailRepository.findOne({where: {loanId, productId}});
+
     if(detailUpdate.remainingQuantity - numberItems < 0) throw new BadRequestException("Cantidad invalida");
     detailUpdate.remainingQuantity -= numberItems;
-    await this.detailRepository.save(detailUpdate);
+    return this.detailRepository.save(detailUpdate);
+    
   }
 
   remove(id: number) {

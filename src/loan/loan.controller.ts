@@ -33,11 +33,12 @@ export class LoanController {
 
   @Auth()
   @Patch(':id')
-  algo(
+  async algo(
     @Body() returnLoanDto:ReturnLoanDto,
-    @Param('id') id: string
+    @Param('id') id: string,
+    @GetUser() user: User
   ){
-    return this.loanService.returnProduct(id, returnLoanDto);
+    return await this.loanService.returnProduct(id, returnLoanDto, user);
   }
 
 

@@ -41,7 +41,10 @@ export class Loan {
 
     @OneToMany(
         () => Move,
-        (move) => move.loan
+        (move) => move.loan,
+        {
+            cascade: ['insert'],
+        }
     )
     moves: Move[];
     

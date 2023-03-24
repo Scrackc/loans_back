@@ -12,7 +12,6 @@ export class Product {
     name: string;
 
     // Relations
-
     @OneToMany(
         () => DetailLoan,
         (detailLoan) => detailLoan.product
