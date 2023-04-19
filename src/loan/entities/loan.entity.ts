@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
-import { DetailLoan } from '../../detail-loan/entities/detail-loan.entity';
 import { Move } from '../../moves/entities/move.entity';
+import { Product } from 'src/products/entities/product.entity';
 
 @Entity({name: 'loans'})
 export class Loan {
@@ -9,15 +9,19 @@ export class Loan {
     id: string;
 
     @Column()
-    date: Date;
+    quantity: number;
 
-    @Column({
-        default: false
-    })
-    isComplete: boolean;
+    // @Column()
+    // remainingQuantity: number;
 
+    // * Relations
 
-    // Relations
+    @OneToMany(
+        () => Move,
+        (move) => move.loan
+    )
+    history: Move[];
+
     @ManyToOne(
         () => User,
         (user) => user.myLoans
@@ -30,23 +34,59 @@ export class Loan {
     )
     user: User;
 
-    @OneToMany(
-        () => DetailLoan,
-        (detailLoan) => detailLoan.loan,
-        {
-            cascade: ['insert'],
-        }
+    @ManyToOne(
+        () => Product,
+        (product) => product.loans 
     )
-    details: DetailLoan[];
+    product: Product;
 
-    @OneToMany(
-        () => Move,
-        (move) => move.loan,
-        {
-            cascade: ['insert'],
-        }
-    )
-    moves: Move[];
+    
+
+
+
+
+
+
+
+    // @Column()
+    // date: Date;
+
+    // @Column({
+    //     default: false
+    // })
+    // isComplete: boolean;
+
+
+    // Relations
+    // @ManyToOne(
+    //     () => User,
+    //     (user) => user.myLoans
+    // )
+    // client: User;
+
+    // @ManyToOne(
+    //     () => User,
+    //     (user) => user.loansCreated,
+    // )
+    // user: User;
+
+    // @OneToMany(
+    //     () => DetailLoan,
+    //     (detailLoan) => detailLoan.loan,
+    //     {
+    //         cascade: ['insert'],
+    //     }
+    // )
+    // details: DetailLoan[];
+
+    // @OneToMany(
+    //     () => Move,
+    //     (move) => move.loan,
+    //     {
+    //         cascade: ['insert'],
+    //     }
+    // )
+    // moves: Move[];
     
 
 }

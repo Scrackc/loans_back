@@ -4,7 +4,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { LoanModule } from './loan/loan.module';
-import { DetailLoanModule } from './detail-loan/detail-loan.module';
 import { MovesModule } from './moves/moves.module';
 import { CommonModule } from './common/common.module';
 import { ProductsModule } from './products/products.module';
@@ -24,7 +23,7 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
       autoLoadEntities: true
     }),
-    UsersModule, LoanModule, DetailLoanModule, MovesModule, CommonModule, ProductsModule, AuthModule,],
+    UsersModule, LoanModule, MovesModule, CommonModule, ProductsModule, AuthModule,],
   controllers: [AppController],
   providers: [AppService],
 })

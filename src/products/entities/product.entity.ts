@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { DetailLoan } from '../../detail-loan/entities/detail-loan.entity';
-import { Move } from '../../moves/entities/move.entity';
+import { Loan } from 'src/loan/entities/loan.entity';
 
 @Entity({name: 'products'})
 export class Product {
@@ -11,16 +10,25 @@ export class Product {
     @Column()
     name: string;
 
-    // Relations
+    // * Relations
     @OneToMany(
-        () => DetailLoan,
-        (detailLoan) => detailLoan.product
+        () => Loan,
+        (loan) => loan.product 
     )
-    loans: DetailLoan[];
+    loans: Loan[];
 
-    @OneToMany(
-        () => Move,
-        (move) => move.product
-    )
-    moves: Move[];
+
+
+    // Relations
+    // @OneToMany(
+    //     () => DetailLoan,
+    //     (detailLoan) => detailLoan.product
+    // )
+    // loans: DetailLoan[];
+
+    // @OneToMany(
+    //     () => Move,
+    //     (move) => move.product
+    // )
+    // moves: Move[];
 }

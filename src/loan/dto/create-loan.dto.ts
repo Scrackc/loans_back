@@ -1,15 +1,16 @@
 import { Type } from "class-transformer";
-import { IsDate, IsNotEmpty, IsUUID, ValidateNested } from "class-validator";
-import { CreateDetailLoanDto } from '../../detail-loan/dto/create-detail-loan.dto';
+import { IsDate, IsInt, IsNotEmpty, IsUUID, ValidateNested } from "class-validator";
+
 
 export class CreateLoanDto {
     @IsUUID()
     idClient: string;
 
-    @IsNotEmpty()
-    @ValidateNested({ each: true })
-    @Type(() => CreateDetailLoanDto)
-    details: CreateDetailLoanDto[];
+    @IsUUID()
+    idProduct: string;
+
+    @IsInt()
+    quantity: number;
 
     // @IsDate()
     // date: Date;

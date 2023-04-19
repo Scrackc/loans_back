@@ -33,8 +33,7 @@ export class User {
     @UpdateDateColumn()
     updateAt: Date;
 
-    // Relations
-
+    // * Relations
     @OneToMany(
         () => Loan,
         (loan) => loan.client
@@ -43,14 +42,35 @@ export class User {
 
     @OneToMany(
         () => Loan,
-        (loan) => loan.user,
+        (loan) => loan.user
     )
-    loansCreated: Loan[]
+    loansCreated: Loan[];
 
     @OneToMany(
         () => Move,
         (move) => move.user
     )
     moves: Move[];
+
+
+    // Relations
+
+    // @OneToMany(
+    //     () => Loan,
+    //     (loan) => loan.client
+    // )
+    // myLoans: Loan[];
+
+    // @OneToMany(
+    //     () => Loan,
+    //     (loan) => loan.user,
+    // )
+    // loansCreated: Loan[]
+
+    // @OneToMany(
+    //     () => Move,
+    //     (move) => move.user
+    // )
+    // moves: Move[];
 
 }

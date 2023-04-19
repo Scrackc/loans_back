@@ -8,38 +8,54 @@ export class Move {
 
     @PrimaryGeneratedColumn('increment')
     id: number;
-
     
     @Column()
     quantity: number;
     
     @CreateDateColumn()
     date: Date;
-    
-    // For relations
+
     @Column()
-    loanId: string;
-    @Column()
-    productId: string;
-    // Relations
+    isAdd: boolean;
+
+    // * Relations 
     @ManyToOne(
         () => Loan,
-        (loan) => loan.moves 
+        (loan) => loan. history
     )
-    @JoinColumn({ name: 'loanId' })
     loan: Loan;
-
-    @ManyToOne(
-        () => Product,
-        (product) => product.moves
-    )
-    @JoinColumn({ name: 'productId' })
-    product: Product;
 
     @ManyToOne(
         () => User,
         (user) => user.moves
     )
     user: User;
+    
+    
+    // For relations
+    // @Column()
+    // loanId: string;
+    // @Column()
+    // productId: string;
+    // // Relations
+    // @ManyToOne(
+    //     () => Loan,
+    //     (loan) => loan.moves 
+    // )
+    // @JoinColumn({ name: 'loanId' })
+    // loan: Loan;
+
+    // @ManyToOne(
+    //     () => Product,
+    //     (product) => product.moves
+    // )
+    // @JoinColumn({ name: 'productId' })
+    // product: Product;
+
+    // @ManyToOne(
+    //     () => User,
+    //     (user) => user.moves
+    // )
+    // user: User;
 
 }

@@ -13,11 +13,11 @@ export class LoanController {
 
   @Auth()
   @Post()
-  create(
+  async create(
     @Body() createLoanDto: CreateLoanDto,
     @GetUser() user: User
   ) {
-    return this.loanService.create(createLoanDto, user);
+    return await this.loanService.hanldeLoan(createLoanDto, user);
   }
 
   @Get()

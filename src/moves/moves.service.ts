@@ -5,6 +5,7 @@ import { CreateMoveDto } from './dto/create-move.dto';
 import { UpdateMoveDto } from './dto/update-move.dto';
 import { Move } from './entities/move.entity';
 import { User } from '../users/entities/user.entity';
+import { Loan } from 'src/loan/entities/loan.entity';
 
 @Injectable()
 export class MovesService {
@@ -14,9 +15,11 @@ export class MovesService {
     private readonly moveRepository: Repository<Move>
   ){}
 
-  create(createMoveDto: CreateMoveDto, user:User) {
+  create(loan: Loan, user:User, quantity: number, isAdd: boolean = false) {
     return this.moveRepository.create({
-      ...createMoveDto,
+      loan,
+      isAdd,
+      quantity,
       user
     })
   }
